@@ -9,6 +9,7 @@ const Item = (function (){
       throw TypeError('Name does not exist');
     }
   }
+  
   const create = function(name){
     return {
       id: cuid(),
@@ -16,7 +17,6 @@ const Item = (function (){
       checked: false,
     }
   }
-  
   
   return {
     validateName,
