@@ -1,7 +1,7 @@
 'use strict';
 /* global store, cuid */
 
-// eslint-disable-next-line no-unused-vars
+//eslint-disable-next-line no-unused-vars
 
 const store = (function() {
 
@@ -15,9 +15,9 @@ const store = (function() {
   const searchTerm = '';
 
   const findById = function(id){
-    const foundItem = store.items.find(item => item.id === id);
+    const foundItem = this.items.find(item => item.id === id);
     return foundItem;
-  }
+  };
 
   const addItem = function(name){
     try{
@@ -31,14 +31,15 @@ const store = (function() {
   };
 
   const findAndToggleChecked = function(id){
-    const foundItem = this.findById();
+    console.log(this);
+    let foundItem = this.findById(id);
     foundItem.checked = !foundItem.checked;
   };  
 
   const findAndUpdateName = function(id, newName){
     try{
       Item.validateName(newName);
-      findById(id);
+      findById(id).name = newName;
     }
     catch(error){
       console.log(`Cannot update name: ${error.message}`);
@@ -50,14 +51,28 @@ const store = (function() {
     this.items.splice(index, 1);
   };
 
+  const toggleCheckedFilter = function() {
+    this.hideCheckedItems = !this.hideCheckedItems;
+  };
+
+  const setSearchTerm = function(search){
+    this.searchTerm = search;
+  };
+
+
 
   return {
     items,
     hideCheckedItems,
     searchTerm,
     addItem,
+    findById,
     findAndToggleChecked,
     findAndUpdateName,
-    findAndDelete
+    findAndDelete,
+    toggleCheckedFilter,
+    setSearchTerm,
+
+
   };
 }());
