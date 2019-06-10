@@ -6,3 +6,13 @@
 const Item = (function (){
   return {};
 }());
+
+function validateName(name){
+  if (name.length === 0 ){
+    throw TypeError('Name does not exist');
+  }
+}
+
+function create (name){
+
+}
