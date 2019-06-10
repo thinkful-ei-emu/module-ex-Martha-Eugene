@@ -14,9 +14,27 @@ const store = (function() {
   const hideCheckedItems = false;
   const searchTerm = '';
 
+  const findById = function(name){
+    try{
+      Item.validateName(name);
+      const newItem = Item.create(name);
+      items.push(newItem);
+    }
+    catch(error){
+      console.log(`Cannot add item: ${error.message}`);
+    }
+  };
+
+  const findAndToggleChecked = function(id){
+    const foundItem = this.findById();
+    foundItem.checked = !foundItem.checked;
+  };  
+
   return {
     items,
     hideCheckedItems,
     searchTerm,
+    findById,
+    findAndToggleChecked,
   }
 }());
